@@ -1,0 +1,8 @@
+id,att1,att2,att3,att4
+One,0,0,0,1
+Two,0,0,1,0
+Three,0,0,1,1
+Four,1,0,0,0
+Five,1,0,1,0
+Six,1,1,0,0
+Seven,1,1,1,0
