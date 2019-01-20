@@ -1,14 +1,15 @@
 import math
 
-badgedict = {
+badgeDict = {
     'badge1': (1, 0, 0, 1, 1, 0),
     'badge2': (1, 1, 0, 0, 0, 0),
     'badge3': (1, 0, 0, 0, 0, 0),
     'badge4': (1, 1, 1, 1, 0, 1)
              }
+
 sqrtd = {}
 DF = {}
-IDF =  {}
+IDF = {}
 
 
 def sqrtList(a):
@@ -40,13 +41,30 @@ def userBadgesetup(badgeList):
 
     return userBadges
 
+def userBadgeProfile(badgeDict, userBadges):
+    bdv = list(badgeDict.values())
+    ubv = list(userBadges.values())
+    userProfile = []
+    for i in range(0, len(bdv[0])):
+        userProfile.append(0)
+    for i in range(0, len(bdv)):
+        bdvi = bdv[i]
+        ubvi = ubv[i]
+        if ubvi == 1 :
+            for j in range(0,len(bdvi)):
+                userProfile[j] += bdvi[j]
+    return(userProfile)
 
-bd1 = list(badgedict.keys())
-bd2 = list(badgedict.values())
 
-for i in range(0,len(badgedict)):
+
+
+bd1 = list(badgeDict.keys())
+bd2 = list(badgeDict.values())
+
+for i in range(0,len(badgeDict)):
     sqrtd[bd1[i]] = sqrtList(bd2[i])
     DF[bd1[i]] = listCount(bd2[i])
     IDF[bd1[i]] = math.log10(len(bd1)/listCount(bd2[i]))
 
-print(userBadgesetup(bd1))
+userBadges = userBadgesetup(bd1)
+print(userBadgeProfile(sqrtd,userBadges))
