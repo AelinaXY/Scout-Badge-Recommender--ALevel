@@ -1,15 +1,15 @@
 import math
 
 badgeDict = {
-    'badge1': (1, 0, 0, 1, 1, 0),
-    'badge2': (1, 1, 0, 0, 0, 0),
-    'badge3': (1, 0, 0, 0, 0, 0),
-    'badge4': (1, 1, 1, 1, 0, 1)
+    'potatoat': (1, 0, 0, 1, 1, 0, 0),
+    'badge2': (1, 1, 0, 0, 0, 0, 1),
+    'badge3': (1, 0, 0, 0, 0, 0, 1),
+    'badge4': (0, 1, 1, 1, 0, 1, 0)
              }
 
 sqrtd = {}
-DF = {}
-IDF = {}
+DF = []
+IDF = []
 
 
 def sqrtList(a):
@@ -22,6 +22,16 @@ def listCount(a):
         if a[i] >0:
             count += 1
     return(count)
+
+def listCount2(list):
+    attributeList = []
+    for i in range(0, len(list[0])):
+        attributeList.append(0)
+    for i in range(0, len(list)):
+        tempList = list[i]
+        for j in range(0, len(attributeList)):
+            attributeList[j] += tempList[j]
+    return attributeList
 
 def userBadgesetup(badgeList):
     userBadges = {}
@@ -55,6 +65,17 @@ def userBadgeProfile(badgeDict, userBadges):
                 userProfile[j] += bdvi[j]
     return(userProfile)
 
+def finalRecommendations(sqrtd, userProfile, IDF):
+    recs = {}
+    sqrtdv = list(sqrtd.values())
+    sqrtdk = list(sqrtd.keys())
+    for i in range(0, len(sqrtd)):
+        tempValue = 0
+        tempList = sqrtdv[i]
+        for j in range(0, len(tempList)):
+            tempValue += (userProfile[j] * IDF[j] * tempList[j])
+        recs[sqrtdk[i]] = tempValue
+    return(recs)
 
 
 
@@ -63,8 +84,15 @@ bd2 = list(badgeDict.values())
 
 for i in range(0,len(badgeDict)):
     sqrtd[bd1[i]] = sqrtList(bd2[i])
-    DF[bd1[i]] = listCount(bd2[i])
-    IDF[bd1[i]] = math.log10(len(bd1)/listCount(bd2[i]))
+
+DF = listCount2(bd2)
+
+for i in range(0, len(DF)):
+    IDF.append(math.log10(len(bd1)/DF[i]))
+print(DF)
+print(IDF)
+
 
 userBadges = userBadgesetup(bd1)
-print(userBadgeProfile(sqrtd,userBadges))
+userProfile = userBadgeProfile(sqrtd,userBadges)
+print(finalRecommendations(sqrtd, userProfile, IDF))
