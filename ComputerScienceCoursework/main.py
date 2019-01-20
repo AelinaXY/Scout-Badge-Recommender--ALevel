@@ -1,29 +1,20 @@
 import math
 
 badgeDict = {
-    'potatoat': (1, 0, 0, 1, 1, 0, 0),
+    'badge1': (1, 0, 0, 1, 1, 0, 1),
     'badge2': (1, 1, 0, 0, 0, 0, 1),
     'badge3': (1, 0, 0, 0, 0, 0, 1),
     'badge4': (0, 1, 1, 1, 0, 1, 0)
              }
 
 sqrtd = {}
-DF = []
-IDF = []
 
 
 def sqrtList(a):
     s = sum(a)
     return [x/(s**0.5) for x in a]
 
-def listCount(a):
-    count = 0
-    for i in range(0,len(a)):
-        if a[i] >0:
-            count += 1
-    return(count)
-
-def listCount2(list):
+def listCount(list):
     attributeList = []
     for i in range(0, len(list[0])):
         attributeList.append(0)
@@ -33,9 +24,17 @@ def listCount2(list):
             attributeList[j] += tempList[j]
     return attributeList
 
+def logList(DF):
+    IDF = []
+    for i in range(0, len(DF)):
+        IDF.append(math.log10(len(bd1) / DF[i]))
+    return(IDF)
+
 def userBadgesetup(badgeList):
     userBadges = {}
     userInput = 0
+    increment = 0
+    userHistory = []
     print('Please enter the number value for the badges you have, one at a time')
     for i in range(0,len(badgeList)):
         print(f'Type {i} for: {badgeList[i]}')
@@ -45,11 +44,22 @@ def userBadgesetup(badgeList):
         userInput = input()
         try:
             userBadges[badgeList[int(userInput)]] = 1
-            print("SUCCESS")
-        except:
-            print("Please enter a valid input, if you want to leave type exit")
+            if increment == 0:
+                increment += 1
+                print("Do you have any other badges, if so input them in the same way. If not type 'exit' ")
+            elif userInput in userHistory:
+                print("You already have that badge")
+                print("If you are done type 'exit'")
+            else:
+                print("Badge Noted")
 
-    return userBadges
+            userHistory.append(userInput)
+        except:
+            if userInput == 'exit':
+                return userBadges
+            else:
+                print("Please enter a valid input, if you want to leave type 'exit'")
+
 
 def userBadgeProfile(badgeDict, userBadges):
     bdv = list(badgeDict.values())
@@ -85,13 +95,8 @@ bd2 = list(badgeDict.values())
 for i in range(0,len(badgeDict)):
     sqrtd[bd1[i]] = sqrtList(bd2[i])
 
-DF = listCount2(bd2)
-
-for i in range(0, len(DF)):
-    IDF.append(math.log10(len(bd1)/DF[i]))
-print(DF)
-print(IDF)
-
+DF = listCount(bd2)
+IDF = logList(DF)
 
 userBadges = userBadgesetup(bd1)
 userProfile = userBadgeProfile(sqrtd,userBadges)
