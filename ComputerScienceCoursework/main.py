@@ -1,4 +1,6 @@
 import math
+from csvimporting import csvImporting
+from operator import itemgetter
 
 badgeDict = {
     'badge1': (1, 0, 0, 1, 1, 0, 1),
@@ -87,6 +89,7 @@ def finalRecommendations(sqrtd, userProfile, IDF):
         recs[sqrtdk[i]] = tempValue
     return(recs)
 
+badgeDict = csvImporting()
 
 
 bd1 = list(badgeDict.keys())
@@ -100,4 +103,11 @@ IDF = logList(DF)
 
 userBadges = userBadgesetup(bd1)
 userProfile = userBadgeProfile(sqrtd,userBadges)
-print(finalRecommendations(sqrtd, userProfile, IDF))
+userRecommendations = finalRecommendations(sqrtd, userProfile, IDF)
+print(userRecommendations)
+s = sorted(userRecommendations.items(), key=lambda x:(x[0],x[1]))
+print(s)
+sortedUserRecs = sorted((dict(s)).items(), key=lambda x:(x[1]), reverse=True)
+#sortedUserRecs = sorted(userRecommendations.items(), key=lambda x: (x[1],x[0]), reverse=True)
+print(sortedUserRecs)
+
