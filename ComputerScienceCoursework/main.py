@@ -34,36 +34,36 @@ def recommendation(userBadges):
             IDF.append(math.log10(len(bd1) / DF[i]))
         return(IDF)
 
-    def userBadgesetup(badgeList):
-        userBadges = {}
-        userInput = 0
-        increment = 0
-        userHistory = []
-        print('Please enter the number value for the badges you have, one at a time')
-        for i in range(0,len(badgeList)):
-            print(f'Type {i} for: {badgeList[i]}')
-            userBadges[badgeList[i]] = 0
-
-        while userInput != 'exit':
-            userInput = input()
-            try:
-                userBadges[badgeList[int(userInput)]] = 1
-                if increment == 0:
-                    increment += 1
-                    print("Do you have any other badges, if so input them in the same way. If not type 'exit' ")
-                elif userInput in userHistory:
-                    print("You already have that badge")
-                    print("If you are done type 'exit'")
-                else:
-                    print("Badge Noted")
-
-                userHistory.append(userInput)
-            except:
-                if userInput == 'exit':
-                    print(userBadges)
-                    return userBadges
-                else:
-                    print("Please enter a valid input, if you want to leave type 'exit'")
+    # def userBadgesetup(badgeList):
+    #     userBadges = {}
+    #     userInput = 0
+    #     increment = 0
+    #     userHistory = []
+    #     print('Please enter the number value for the badges you have, one at a time')
+    #     for i in range(0,len(badgeList)):
+    #         print(f'Type {i} for: {badgeList[i]}')
+    #         userBadges[badgeList[i]] = 0
+    #
+    #     while userInput != 'exit':
+    #         userInput = input()
+    #         try:
+    #             userBadges[badgeList[int(userInput)]] = 1
+    #             if increment == 0:
+    #                 increment += 1
+    #                 print("Do you have any other badges, if so input them in the same way. If not type 'exit' ")
+    #             elif userInput in userHistory:
+    #                 print("You already have that badge")
+    #                 print("If you are done type 'exit'")
+    #             else:
+    #                 print("Badge Noted")
+    #
+    #             userHistory.append(userInput)
+    #         except:
+    #             if userInput == 'exit':
+    #                 print(userBadges)
+    #                 return userBadges
+    #             else:
+    #                 print("Please enter a valid input, if you want to leave type 'exit'")
 
 
     def userBadgeProfile(badgeDict, userBadges):
@@ -113,8 +113,6 @@ def recommendation(userBadges):
                                     #print(s)
     sortedUserRecs = sorted((dict(s)).items(), key=lambda x:(x[1]), reverse=True)
     #sortedUserRecs = sorted(userRecommendations.items(), key=lambda x: (x[1],x[0]), reverse=True)
-
-    print(sortedUserRecs)
 
     return(sortedUserRecs)
 

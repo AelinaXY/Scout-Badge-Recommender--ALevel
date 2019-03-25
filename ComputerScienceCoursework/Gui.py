@@ -1,145 +1,68 @@
 from easygui import *
 import sys
 from main import recommendation
+import json
+from csvimporting import csvImporting
 
-while False:
-    msgbox("Hello, world!")
-
-    msg ="What is your favorite flavor?"
-    title = "Ice Cream Survey"
-    choices = ["Vanilla", "Chocolate", "Strawberry", "Rocky Road"]
-    choice = choicebox(msg, title, choices)
-
-    # note that we convert choice to string, in case
-    # the user cancelled the choice, and we got None.
-    msgbox("You chose: " + str(choice), "Survey Result")
-
-    msg = "Do you want to continue?"
-    title = "Please Confirm"
-    if ccbox(msg, title):     # show a Continue/Cancel dialog
-        pass  # user chose Continue
-    else:
-        sys.exit(0)           # user chose Cancel
 
 def picker():
 
     try:
         msg = "Pick your badges"
         title = "Badge picker"
-        choices = ["Gold Chief Scout Award",
-    "Adventure Challenge",
-    "Creative Challenge",
-    "Expedition Challenge",
-    "Outdoor Challenge",
-    "Skills Challenge",
-    "Team Leader Challenge",
-    "Teamwork Challenge",
-    "World Challenge",
-    "Activity Centre Service",
-    "Air Researcher",
-    "Air Spotter",
-    "Air or Sea Navigation",
-    "Angler",
-    "Artist",
-    "Astronautics",
-    "Astronomer",
-    "Athletics",
-    "Athletics Plus",
-    "Camper",
-    "Caver",
-    "Chef",
-    "Circus Skills",
-    "Cyclist",
-    "DIY",
-    "Dragon Boating",
-    "Electronics",
-    "Entertainer",
-    "Enviromental Conservation",
-    "Equestrian",
-    "Farming",
-    "Fire Safety",
-    "Forester",
-    "Fundraising",
-    "Geocaching",
-    "Global Issues",
-    "Hill Walker",
-    "Hobbies",
-    "International",
-    "Librarian",
-    "Lifesaver",
-    "Local Knowledge",
-    "Martial arts",
-    "Master at Arms",
-    "Mechanic",
-    "Media Relations and Marketing",
-    "Meteorologist",
-    "Model Maker",
-    "My Faith",
-    "Naturalist",
-    "Orienteer",
-    "Parasecending",
-    "Photographer",
-    "Physical Recreation",
-    "Pioneer",
-    "Power Coxswain",
-    "Pulling(Rowing)",
-    "Quartermaster",
-    "Snowsports",
-    "Sports Enthusiast",
-    "Street Sports",
-    "Survival Skills",
-    "Water Activities",
-    "World Faiths",
-    "Writer",
-    "Air Activites",
-    "Community Impact",
-    "Digital Citizen",
-    "Digital Maker",
-    "Emergency Aid",
-    "Hikes Away",
-    "Musician",
-    "Nautical Skills",
-    "Navigator",
-    "Nights Away",
-    "Paddle Sports",
-    "Sailing",
-    "Snowsports",
-    "Swimmer",
-    "Time on the Water",
-    ]
-        choice = multchoicebox(msg,title,choices)
-        choicedict = {}
-        for i in range(len(choices)):
-            choicedict[choices[i]] = 0
-        for i in range(len(choice)):
-            choicedict[choices[choices.index(choice[i])]] = 1
-        print(choicedict)
+        badgeList = list(csvImporting().keys())
+        badgeChoice = multchoicebox(msg, title, badgeList)
+        choiceDict = {}
+        for i in range(len(badgeList)):
+            choiceDict[badgeList[i]] = 0
+        for i in range(len(badgeChoice)):
+            choiceDict[badgeList[badgeList.index(badgeChoice[i])]] = 1
 
     except TypeError:
         sys.exit(0)
 
+    return choiceDict
 
-    return (choicedict)
 
 def output(recs):
     msg = ("The program believes you would like these badges: \n" + str(recs[0]) + "\n" + str(recs[1]) + "\n" + str(recs[2]) + "\n" + str(recs[3]) + "\n" + str(recs[4]))
-    title = ("Recommendations")
+    title = "Recommendations"
 
     if ccbox(msg, title):
-        recomendor()
+        mainStartup()
         pass
     else:
         sys.exit(0)
 
 
-def recomendor():
+def newRecommendations():
     badges = picker()
     recommendations = recommendation(badges)
     rec1 = []
     for i in range(len(recommendations)):
-        temprec = recommendations[i]
-        rec1.append(temprec[0])
-    output(rec1)
+        tempRec = recommendations[i]
+        rec1.append(tempRec[0])
 
-recomendor()
+    print(rec1)
+    for i in range(len(list(badges.keys()))):
+        if (list(badges.values()))[i] == 1:
+            print ((list(badges.keys()))[i])
+            rec1.remove((list(badges.keys()))[i])
 
+    with open('recommendations.json', 'w') as f:
+        json.dump(rec1, f)
+
+
+    print("help", rec1)
+
+    return rec1
+
+def mainFunc():
+    image = "logo.png"
+    choice = buttonbox("Welcome to the Scout Badge Recommendation Engine", "Main", choices=["Quit", "Enter new recommendations", "Add New Badges", "Remove Badges", "Badges", "Your Recommended Badges"], image=image)
+
+    if choice == "Enter new recommendations":
+        newRecommendations()
+
+
+mainFunc()
