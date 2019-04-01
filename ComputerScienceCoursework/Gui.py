@@ -46,6 +46,7 @@ def recommendedBadges():
         for i in range(5):
             if choice == recommendations[i]:
                 badgeFunc(recommendations[i])
+    return
 
 
 #A function for creating new recommendations
@@ -69,7 +70,10 @@ def newRecommendations():
 
 # a function to remove badges from your pool of owned badges
 # very messy code
+
+
 def removeBadges():
+
     badgeDict = {}
     rec1 = []
     with open('recommendations.json') as json_file:     # opens the previous recommendations
@@ -112,6 +116,57 @@ def removeBadges():
         if choice == "Badge Recommendations":
             recommendedBadges()
 
+    return
+
+def addBadges():
+
+    badgeDict = {}
+    rec1 = []
+    with open('recommendations.json') as json_file:
+        recommendations = list(json.load(json_file))
+
+    badgeList = list(csvImporting().keys())
+
+    notOwnedBadges = [x for x in badgeList if x in recommendations]
+
+    try:
+        choice = multchoicebox(msg="Please enter the badges you wish to add", title="Add Badges",
+                               choices=notOwnedBadges)
+
+        ownedBadges = [x for x in badgeList if x not in recommendations]
+
+        newOwnedBadges = ownedBadges + choice
+
+        for i in range(len(badgeList)):
+            if badgeList[i] in newOwnedBadges:
+                badgeDict[badgeList[i]] = 1
+            else:
+                badgeDict[badgeList[i]] = 0
+
+        recommendations = recommendation(badgeDict)
+
+        for i in range(len(recommendations)):
+            rec1.append(recommendations[i][0])
+
+        for i in range(len(list(badgeDict.keys()))):
+            if (list(badgeDict.values()))[i] == 1:
+                rec1.remove((list(badgeDict.keys()))[i])
+
+        with open("recommendations.json", "w") as json_file:
+            json.dump(rec1, json_file)
+
+        recommendedBadges()
+
+    except:
+        choice = choicebox(msg="Oops, looks like you have selected no badges. \n"
+                               "Do you want to review your badges or go back to the main  menu", title="Error",
+                           choices=["Back", "Main menu", "Badge Recommendations"])
+        if choice == "Back" or "Main menu":
+            mainFunc()
+        if choice == "Badge Recommendations":
+            recommendedBadges()
+
+    return
 # the main control function
 def mainFunc():
     image = "logo.png"
@@ -126,5 +181,8 @@ def mainFunc():
 
     if choice == "Remove Badges":
         removeBadges()
+
+    if choice == "Add New Badges":
+        addBadges()
 
 mainFunc()
