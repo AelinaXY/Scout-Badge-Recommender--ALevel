@@ -4,13 +4,15 @@ from main import recommendation
 import json
 from csvimporting import csvImporting
 
-
+# lets to user pick badges using the csv list of badges
 def picker():
     try:
         msg = "Pick your badges"
         title = "Badge picker"
         badgeList = list(csvImporting().keys())
         badgeChoice = multchoicebox(msg, title, badgeList)
+        if badgeChoice == None:
+            mainFunc()
         choiceDict = {}
         for i in range(len(badgeList)):
             choiceDict[badgeList[i]] = 0
@@ -22,7 +24,8 @@ def picker():
 
     return choiceDict
 
-
+# the main function for showing the user their recommendations
+# it looks large but most of it is just one line which involves 10 variables
 def recommendedBadges():
     with open('recommendations.json') as json_file:
         recommendations = list(json.load(json_file))
@@ -45,10 +48,10 @@ def recommendedBadges():
                 badgeFunc(recommendations[i])
 
 
-
+#A function for creating new recommendations
 def newRecommendations():
-    badges = picker()
-    recommendations = recommendation(badges)
+    badges = picker()                   #goes off to the picker function to let the user pick badges
+    recommendations = recommendation(badges)  #outputs a list of lists
     rec1 = []
     for i in range(len(recommendations)):
         tempRec = recommendations[i]
@@ -58,24 +61,49 @@ def newRecommendations():
         if (list(badges.values()))[i] == 1:
             rec1.remove((list(badges.keys()))[i])
 
+        # takes the final list of recommendations and inputs it into a json file
     with open('recommendations.json', 'w') as f:
         json.dump(rec1, f)
 
     return
 
+# a function to remove badges from your pool of owned badges
+# very messy code
 def removeBadges():
-
-    with open('recommendations.json') as json_file:
+    badgeDict = {}
+    rec1 = []
+    with open('recommendations.json') as json_file:     # opens the previous recommendations
         recommendations = list(json.load(json_file))
 
-    choice = multchoicebox(msg="Please enter the badges you wish to remove", title="Remove Badges", choices=recommendations)
+    badgeList = list(csvImporting().keys())      # imports a list of badges
 
-    recommendations = [x for x in recommendations if x not in list(choice)]
+    ownedBadges = [x for x in badgeList if x not in recommendations]     # finds out the badges the user owns
 
-    with open("recommendations.json", "w") as json_file:
-        json.dump(recommendations, json_file)
+    choice = multchoicebox(msg="Please enter the badges you wish to remove", title="Remove Badges",
+                           choices=ownedBadges)     # the user selects the badges they want gone
+    newOwnedBadges = [x for x in ownedBadges if x not in choice] # creates a list of the new owned badges
 
+    for i in range(len(badgeList)):     # converts it to dictionary form for the recommendation engine
+        if badgeList[i] in newOwnedBadges:
+            badgeDict[badgeList[i]] = 1
+        else:
+            badgeDict[badgeList[i]] = 0
 
+    recommendations = recommendation(badgeDict)
+
+    for i in range(len(recommendations)):   # creates a list of badges the user has been recommended
+        rec1.append(recommendations[i][0])
+
+    for i in range(len(list(badgeDict.keys()))):    # gets rid of done badges
+        if (list(badgeDict.values()))[i] == 1:
+            rec1.remove((list(badgeDict.keys()))[i])
+
+    with open("recommendations.json", "w") as json_file:    # puts it back into the json file
+        json.dump(rec1, json_file)
+
+    recommendedBadges()     # shows the user the badges they want
+
+# the main control function
 def mainFunc():
     image = "logo.png"
     choice = buttonbox("Welcome to the Scout Badge Recommendation Engine", "Main", choices=["Quit", "Enter new recommendations", "Add New Badges", "Remove Badges", "Badges", "Your Recommended Badges"], image=image)
