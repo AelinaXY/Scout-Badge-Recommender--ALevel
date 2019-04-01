@@ -6,7 +6,6 @@ from csvimporting import csvImporting
 
 
 def picker():
-
     try:
         msg = "Pick your badges"
         title = "Badge picker"
@@ -30,6 +29,7 @@ def recommendedBadges():
 
         if len(recommendations) <= 5:
             msgbox(msg="This application cannot help you as you know what you need to do. \n Go and do it, We believe in you!", title="Yay!")
+            mainFunc()
 
         print(recommendations[0])
         image = "badges\{0}.png".format(recommendations[0])
@@ -38,12 +38,10 @@ def recommendedBadges():
             mainFunc()
 
         if choice == image:
-            print(recommendations[0])
             badgeFunc(recommendations[0])
 
         for i in range(5):
             if choice == recommendations[i]:
-                print(choice)
                 badgeFunc(recommendations[i])
 
 
@@ -63,9 +61,20 @@ def newRecommendations():
     with open('recommendations.json', 'w') as f:
         json.dump(rec1, f)
 
-
-
     return
+
+def removeBadges():
+
+    with open('recommendations.json') as json_file:
+        recommendations = list(json.load(json_file))
+
+    choice = multchoicebox(msg="Please enter the badges you wish to remove", title="Remove Badges", choices=recommendations)
+
+    recommendations = [x for x in recommendations if x not in list(choice)]
+
+    with open("recommendations.json", "w") as json_file:
+        json.dump(recommendations, json_file)
+
 
 def mainFunc():
     image = "logo.png"
@@ -75,6 +84,10 @@ def mainFunc():
         newRecommendations()
         recommendedBadges()
 
+    if choice == "Your Recommended Badges":
+        recommendedBadges()
 
+    if choice == "Remove Badges":
+        removeBadges()
 
 mainFunc()
