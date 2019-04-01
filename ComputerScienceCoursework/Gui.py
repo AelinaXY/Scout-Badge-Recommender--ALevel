@@ -79,29 +79,38 @@ def removeBadges():
 
     ownedBadges = [x for x in badgeList if x not in recommendations]     # finds out the badges the user owns
 
-    choice = multchoicebox(msg="Please enter the badges you wish to remove", title="Remove Badges",
+    try:
+        choice = multchoicebox(msg="Please enter the badges you wish to remove", title="Remove Badges",
                            choices=ownedBadges)     # the user selects the badges they want gone
-    newOwnedBadges = [x for x in ownedBadges if x not in choice] # creates a list of the new owned badges
+        newOwnedBadges = [x for x in ownedBadges if x not in choice] # creates a list of the new owned badges
+        for i in range(len(badgeList)):  # converts it to dictionary form for the recommendation engine
+            if badgeList[i] in newOwnedBadges:
+                badgeDict[badgeList[i]] = 1
+            else:
+                badgeDict[badgeList[i]] = 0
 
-    for i in range(len(badgeList)):     # converts it to dictionary form for the recommendation engine
-        if badgeList[i] in newOwnedBadges:
-            badgeDict[badgeList[i]] = 1
-        else:
-            badgeDict[badgeList[i]] = 0
+        recommendations = recommendation(badgeDict)
 
-    recommendations = recommendation(badgeDict)
+        for i in range(len(recommendations)):  # creates a list of badges the user has been recommended
+            rec1.append(recommendations[i][0])
 
-    for i in range(len(recommendations)):   # creates a list of badges the user has been recommended
-        rec1.append(recommendations[i][0])
+        for i in range(len(list(badgeDict.keys()))):  # gets rid of done badges
+            if (list(badgeDict.values()))[i] == 1:
+                rec1.remove((list(badgeDict.keys()))[i])
 
-    for i in range(len(list(badgeDict.keys()))):    # gets rid of done badges
-        if (list(badgeDict.values()))[i] == 1:
-            rec1.remove((list(badgeDict.keys()))[i])
+        with open("recommendations.json", "w") as json_file:  # puts it back into the json file
+            json.dump(rec1, json_file)
 
-    with open("recommendations.json", "w") as json_file:    # puts it back into the json file
-        json.dump(rec1, json_file)
+        recommendedBadges()  # shows the user the badges they want
 
-    recommendedBadges()     # shows the user the badges they want
+    except:
+        choice = choicebox(msg="Oops, looks like you have selected no badges. \n"
+               "Do you want to review your badges or go back to the main  menu", title="Error",
+                           choices=["Back", "Main menu", "Badge Recommendations"])
+        if choice == "Back" or "Main menu":
+            mainFunc()
+        if choice == "Badge Recommendations":
+            recommendedBadges()
 
 # the main control function
 def mainFunc():
