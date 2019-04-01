@@ -108,13 +108,7 @@ def removeBadges():
         recommendedBadges()  # shows the user the badges they want
 
     except:
-        choice = choicebox(msg="Oops, looks like you have selected no badges. \n"
-               "Do you want to review your badges or go back to the main  menu", title="Error",
-                           choices=["Back", "Main menu", "Badge Recommendations"])
-        if choice == "Back" or "Main menu":
-            mainFunc()
-        if choice == "Badge Recommendations":
-            recommendedBadges()
+        mainFunc()
 
     return
 
@@ -158,13 +152,7 @@ def addBadges():
         recommendedBadges()
 
     except:
-        choice = choicebox(msg="Oops, looks like you have selected no badges. \n"
-                               "Do you want to review your badges or go back to the main  menu", title="Error",
-                           choices=["Back", "Main menu", "Badge Recommendations"])
-        if choice == "Back" or "Main menu":
-            mainFunc()
-        if choice == "Badge Recommendations":
-            recommendedBadges()
+         mainFunc()
 
     return
 # the main control function
