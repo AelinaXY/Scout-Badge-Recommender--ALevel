@@ -43,9 +43,8 @@ def recommendedBadges():
         if choice == image:
             badgeFunc(recommendations[0])
 
-        for i in range(5):
-            if choice == recommendations[i]:
-                badgeFunc(recommendations[i])
+        if choice in recommendations:
+            badgeFunc(choice)
     return
 
 
@@ -152,14 +151,26 @@ def addBadges():
         recommendedBadges()
 
     except:
-         mainFunc()
+        mainFunc()
 
     return
+
+def allBadgeFunc():
+    badgeList = list(csvImporting().keys())
+    badgeChoice = choicebox(msg="Choose your badge", title="Badges", choices = badgeList)
+
+    if badgeChoice == None:
+        mainFunc()
+
+    else:
+        badgeFunc(badgeChoice)
+
 # the main control function
 def mainFunc():
     image = "logo.png"
     choice = buttonbox("Welcome to the Scout Badge Recommendation Engine", "Main", choices=["Quit", "Enter new recommendations", "Add New Badges", "Remove Badges", "Badges", "Your Recommended Badges"], image=image)
 
+    # If statements which control which way you go
     if choice == "Enter new recommendations":
         newRecommendations()
         recommendedBadges()
@@ -172,5 +183,8 @@ def mainFunc():
 
     if choice == "Add New Badges":
         addBadges()
+
+    if choice == "Badges":
+        allBadgeFunc()
 
 mainFunc()
