@@ -1,11 +1,65 @@
 {
-  "Gold Chief Scout Award":
-  ["Earn six activity or staged activity badges of your choice. They could be badges you gain outside of your normal meetings or ones you’ve achieved through your programme",
-  "Complete the nine challenge awards. These are: World Challenge Award, Skills Challenge Award, Creative Challenge Award, Outdoors Challenge Award, Adventure Challenge Award, Expedition Challenge Award, Teamwork Challenge Award, Team Leader Challenge Award, Personal Challenge Award"],
-
-  "Adventure Challenge":
-  ["Take part in four different adventurous activities. At least two of these activities should be new to you and you should try to do them on at least two separate occasions. You could try: abseiling, canoeing, caving or potholing, climbing, cycling, dragon boating, gliding, hillwalking, hiking, hovercrafting, mountain boarding, night hiking, orienteering, paragliding, pony trekking or horse riding, powered aircraft, pulling, rafting, sailing, snowboarding, stunt kiting, sub-aqua, surfing, water-skiing, windsurfing",
+  "Gold Chief Scout Award": [
+    "Earn six activity or staged activity badges of your choice. They could be badges you gain outside of your normal meetings or ones you have achieved through your programme",
+    "Complete the nine challenge awards. These are: World Challenge Award, Skills Challenge Award, Creative Challenge Award, Outdoors Challenge Award, Adventure Challenge Award, Expedition Challenge Award, Teamwork Challenge Award, Team Leader Challenge Award, Personal Challenge Award"
+  ],
+  "Adventure Challenge": [
+    "Take part in four different adventurous activities. At least two of these activities should be new to you and you should try to do them on at least two separate occasions. You could try: abseiling, canoeing, caving or potholing, climbing, cycling, dragon boating, gliding, hillwalking, hiking, hovercrafting, mountain boarding, night hiking, orienteering, paragliding, pony trekking or horse riding, powered aircraft, pulling, rafting, sailing, snowboarding, stunt kiting, sub-aqua, surfing, water-skiing, windsurfing",
     "Show how you have developed your skill and expertise in one of these activities. Show that you know the safety issues involved, and that you can use any equipment needed for the activity safely.",
-    "Learn about any environmental issues caused by your activity. Take steps to reduce any harm to the environment.", 
-    "Research other ways you can take part, or develop your skills, in your chosen activities. Follow up your research with action!"]
+    "Learn about any environmental issues caused by your activity. Take steps to reduce any harm to the environment.",
+    "Research other ways you can take part, or develop your skills, in your chosen activities. Follow up your research with action!"
+  ],
+  "Creative Challenge": [
+    "Over a period of time, take part in at least four creative activities. Some of these should be new to you. You could try: music, photography, wood or metalwork, needlework, cooking, website design, dance.",
+    "Show that you have developed your skills in one of these activities. Show that you know how to use any equipment safely.",
+    "Use your creative ability to produce something that promotes a Scouting activity or an event.",
+    "Construct a model using materials like a plastic kit or recycled items. Alternatively, make a useful item from wood, metal or plastic.",
+    "Show how to use social media or the internet in a creative and safe way. Explain why it’s important to use them safely.",
+    "Take part in a performance. You could try: magic tricks, gymnastics display, campfire sketch, street dance, plays, concerts."
+  ],
+  "Expedition Challenge": [
+    "Take part in either an expedition or an exploration over two days with at least three other Scouts. This should include a night away at a campsite or hostel.",
+    "Take an active part in planning the expedition. Do any training you need and be well prepared. Training should include: planning a route, including rest and meal stops. Being able to work out how long it should take you to travel that route. Choosing suitable equipment for an expedition. You might consider tents, stoves, rucksacks, walking equipment, emergency equipment, first aid kit, wet weather gear, appropriate food and a camera. Navigation and using things like maps and timetables for your expedition. You might want to brush up on using an Ordnance Survey or similar map, a compass, a GPS device, a street map or A-Z, and rail or bus timetables. Knowing what to do in an emergency.",
+    "During the expedition or exploration: play a full part in the team, use a map or other navigation device to keep track of where you are, cook and eat at least one hot meal,do a task",
+    "Produce an individual report or presentation within the three weeks following your expedition. You could present your work as a project, performance, video recording, oral presentation, blog or website."
+  ],
+  "Outdoor Challenge":
+  ["Take an active part in at least eight nights away as a Scout. Four of the nights should be camping. While you’re away, work with other Scouts do the other tasks on this list.",
+  "With others, pitch and strike your tent.",
+  "Lead, or help to lead, a group of Scouts to set up a well-organised site. It should include sleeping tents, food and equipment stores, a fire or stove, kitchen and eating area.",
+  "Prepare and light an open fire or set up a suitable stove. Use it to prepare, cook and serve a meal safely.",
+  "Understand the three points of the Countryside Code. Show what action you can take to follow the code.",
+  "Find out why personal and campsite hygiene is important. What should you do to be hygienic?",
+  "Using knots that you have learned, build a simple pioneering project, object or camp gadget.",
+  "Explore the environment of your camp and make sure you know where everything  is. Respect the environment you are in and, at the end of the camp, leave the site as you found it.",
+  "Find out what accidents and incidents can happen outdoors or during your camp. Show how you would deal with them.",
+  "Show how to use an axe, saw or knife safely. You can choose any or all of these tools.",
+  "Complete at least four of these tasks: Provide a service commitment to the site for about an hour, Take part in a wide game, Take part in a campfire or other entertainment, Working with others, successfully complete a two-hour activity or project, Plan a balanced menu for a short camp, Lead the cooking of a meal for the group, Show that you know the safety precautions for using lamps and stoves, Cook a backwoods meal with the group, Build a bivouac and sleep in it, Show how to pack a rucksack correctly, with appropriate kit for the camp or event."],
+  "Personal Challenge":
+  ["Complete two personal challenges which you and your leader agree on.",
+  "You should choose one of the challenges and your leader will choose the other.",
+  "The challenges must be different from the ones you did for your Beaver and Cub Personal Challenge Awards. "],
+  "Skills Challenge":
+  ["Regularly take part in physical activities over a period of four to six weeks. Keep a record showing your improvement. Your goal could be to develop in an activity or successfully complete a challenge.",
+  "Show you understand why eating a sensible diet and getting enough sleep is important.",
+  "Do some research so that you can explain the dangers and harmful effects of smoking, alcohol and drugs.",
+  "Learn and use at least five of these skills: Mend or customise an item of clothing. Cook and serve a two-course meal, for at least four people. Fix a puncture or a dropped chain on a bike. Wash up after a meal, making sure everything is clean and dry. Use a washing machine to wash a load of clothes. Iron your uniform shirt. Change a lightbulb, in a ceiling light. Set a heating timer and thermostat as needed for the time of year. Clean a toilet, hob or oven. Do another similar home skill."],
+  "Team Leader Challenge":
+  ["Successfully lead a Scout team at a camp or all day event. You need to: look after the whole Patrol / team, help individuals in your team if they need it, make sure that your team achieves the goal you have been set.",
+  "Help a new Scout to be part of the Troop with an understanding of what is expected of them.",
+  "Help another Scout to develop a Scouting skill.",
+  "Represent the views of other Scouts (for example at a Patrol Leaders’ Council or something similar) and report back to them afterwards."],
+  "Teamwork Challenge":
+  ["On at least three separate occasions, be part of a Scout team, where you work together to achieve a goal.",
+  "Give at least three examples of when you’ve been in different types of teams. Explain your role in those teams.",
+  "Take part in at least three teambuilding activities that you have not tried before.",
+  "Take an active part in at least four Troop or Patrol Forums. At each forum, express your views on at least one item being discussed."],
+  "World Challenge":
+  ["Choose an aspect of local community life and find out as much as you can about it.",
+  "Spend a day volunteering with and finding out about a service in your local community: (What are their challenges? Who relies on this service? What positive impact could you have on this service in the future?). Services could be homeless shelters, local nature reserves, care homes and food banks.",
+  "Take part in an activity that reflects upon and explores your own beliefs, attitudes and values (this may or may not include religious beliefs). What values do we share as Scouts? Which Scout value means the most to you? ",
+  "Take part in an activity that explores common beliefs and attitudes towards gender or disability in different societies. You could look at this in the context of music, sport and fashion.",
+  "Take an active part in an environmental project.",
+  "Investigate and try to make contact with Scouts in another country. Make sure you and your leader read the International Links Guidance here.",
+  "Take part in an activity that explores an international issue."]
 }
