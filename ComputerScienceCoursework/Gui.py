@@ -66,7 +66,7 @@ def newRecommendations():
         json.dump(rec1, f)
 
     recommendedBadges()
-    
+
     return
 
 # a function to remove badges from your pool of owned badges
@@ -171,18 +171,18 @@ def allBadgeFunc():
 def badgeFunc(choice):
     with open('badge.json') as json_file:
         badgeRequirements = json.load(json_file)[choice]
-    selection = buttonbox(msg=("{0}\n Requirements: \n\n {1}".format(choice, " \n".join(badgeRequirements))), title=choice, choices=["Back", "View Image"])
+    selection = textbox(text=("{0}".format("\n\n".join(badgeRequirements))), msg="{0} \n Requirements:".format(choice), title=choice)
 
-    if selection == "View Image":
+    if selection == None:
+        mainFunc()
+    if selection == "\n\n".join(badgeRequirements):
         badgeFuncImage(choice)
-    if selection == "Back":
-        allBadgeFunc()
 
 def badgeFuncImage(choice):
     image = "badges\{0}.png".format(choice)
-    selection = buttonbox(image=image, title=choice, choices=["Back"])
-    if selection == "Back":
-        badgeFunc(choice)
+    buttonbox(image=image, title=choice, choices=["Back"])
+    badgeFunc(choice)
+
 # the main control function
 def mainFunc():
     image = "logo.png"
