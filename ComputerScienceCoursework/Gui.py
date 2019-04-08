@@ -174,7 +174,8 @@ def badgeFunc(choice):
     selection = textbox(text=("{0}".format("\n\n".join(badgeRequirements))), msg="{0} \n Requirements:".format(choice), title=choice)
 
     if selection == None:
-        mainFunc()
+        allBadgeFunc()
+
     if selection == "\n\n".join(badgeRequirements):
         badgeFuncImage(choice)
 
@@ -183,13 +184,40 @@ def badgeFuncImage(choice):
     buttonbox(image=image, title=choice, choices=["Back"])
     badgeFunc(choice)
 
+def helpFunc():
+    choice = msgbox(ok_button="Main Menu", msg="Hello and welcome to the Scout Badge Recommendation engine\n"
+                                      "This quick guide will take you through everything you need to know about the application\n"
+                                      "\n"
+                                      "Add New Badges:\n"
+                                      "This function allows you to add new badges to your list of badges that you entered"
+                                      "when you first started the application\n"
+                                      "\n"
+                                      "Remove Badges:\n"
+                                      "Allows you to remove badges from your list of badges\n"
+                                      "\n"
+                                      "Badge List:\n"
+                                      "Allows you to view a list of all the badges in scouting, clicking on one of these"
+                                      "allows you to view the recommendations\n"
+                                      "\n"
+                                      "Your Recommended Badges:\n"
+                                      "Allows you to view your recommended badges which have been specially selected based"
+                                      "on the badges you have done\n"
+                                      "\n"
+                                      "Enter brand new set of badges:\n"
+                                      "This function allows you select a completely new set of badges to get recommendations"
+                                      "about.")
+    if choice == "Main Menu":
+        mainFunc()
+    else:
+        sys.exit()
+
 # the main control function
 def mainFunc():
     image = "logo.png"
-    choice = buttonbox("Welcome to the Scout Badge Recommendation Engine", "Main", choices=["Quit", "Enter new recommendations", "Add New Badges", "Remove Badges", "Badges", "Your Recommended Badges"], image=image)
+    choice = buttonbox("Welcome to the Scout Badge Recommendation Engine\nIf you are confused on what to do click the Help button", "Main", choices=["Quit", "Add New Badges", "Remove Badges", "Badge List", "Your Recommended Badges", "Enter brand new set of badges", "Help"], image=image)
 
     # If statements which control which way you go
-    if choice == "Enter new recommendations":
+    if choice == "Enter brand new set of badges":
         newRecommendations()
 
     if choice == "Your Recommended Badges":
@@ -201,7 +229,10 @@ def mainFunc():
     if choice == "Add New Badges":
         addBadges()
 
-    if choice == "Badges":
+    if choice == "Badge List":
         allBadgeFunc()
+
+    if choice == "Help":
+        helpFunc()
 
 mainFunc()
