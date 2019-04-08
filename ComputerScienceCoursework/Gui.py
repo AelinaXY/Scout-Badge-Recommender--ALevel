@@ -174,12 +174,24 @@ def allBadgeFunc():
 def badgeFunc(choice):
     with open('badge.json') as json_file:
         badgeRequirements = json.load(json_file)[choice]
-    selection = textbox(text=("{0}".format("\n\n".join(badgeRequirements))), msg="{0} \n Requirements:".format(choice), title=choice)
+    #selection = textbox(text=("{0}".format("\n\n".join(badgeRequirements))), msg="{0} \n Requirements:".format(choice), title=choice)
+    selection = buttonbox( msg="{0} \nRequirements:\n\n{1}".format(choice,"\n\n".join(badgeRequirements)),
+                           choices=["Main Menu", "Badge List", "Recommended Badges", "More like this", "Badge Image"],
+                           title=choice)
 
-    if selection == None:
+    if selection == "Main Menu":
+        mainFunc()
+
+    if selection == "Badge List":
         allBadgeFunc()
 
-    if selection == "\n\n".join(badgeRequirements):
+    if selection == "Recommended Badges":
+        recommendedBadges()
+
+    if selection == "More like this":
+        print("test")
+
+    if selection == "Badge Image":
         badgeFuncImage(choice)
 
 def badgeFuncImage(choice):
