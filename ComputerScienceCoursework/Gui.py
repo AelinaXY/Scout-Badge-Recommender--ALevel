@@ -228,6 +228,47 @@ def helpFunc():  # Tells the user everything they need to know about the applica
     else:
         sys.exit()
 
+
+def moreLikeThis(choice):
+
+    badgeDict = {}
+    rec1 = []
+    badgeList = list(csvImporting().keys())
+
+    for i in range(len(badgeList)):
+        if badgeList[i] == choice:
+            badgeDict[badgeList[i]] = 1
+        else:
+            badgeDict[badgeList[i]] = 0
+
+    recommendations = recommendation(badgeDict)
+
+    for i in range(len(recommendations)):
+        rec1.append(recommendations[i][0])
+
+    rec1.remove(choice)
+
+    image = "badges\{0}.png".format(rec1[0])
+    choice = buttonbox(
+        "Badges like {5} are:  {0}, {1}, {2}, {3}, {4} \n Click the badge you want to find out more about, or click back".format(
+            rec1[0], rec1[1], rec1[2], rec1[3], rec1[4], choice),
+        title="More Like this", choices=(
+        ["Back", "Main Menu", rec1[0], rec1[1], rec1[2], rec1[3], rec1[4]]),
+        image=image)
+
+    if choice == "Back":
+        badgeFunc(choice)
+
+    if choice == "Main Menu":
+        mainFunc()
+
+    if choice == image:
+        badgeFunc(rec1[0])
+
+    if choice in rec1:
+        badgeFunc(choice)
+
+
 # the main control function
 def mainFunc():
     with open('firsttime.json') as json_file:
