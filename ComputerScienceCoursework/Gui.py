@@ -171,15 +171,15 @@ def allBadgeFunc():
         badgeFunc(badgeChoice)
 
 
-def badgeFunc(choice):
-    with open('badge.json') as json_file:
-        badgeRequirements = json.load(json_file)[choice]
-    #selection = textbox(text=("{0}".format("\n\n".join(badgeRequirements))), msg="{0} \n Requirements:".format(choice), title=choice)
+def badgeFunc(choice):  # Allows the user to see the requirements for the badges
+    with open('badge.json') as json_file:  # Opens the json file with all the badge requirements in
+        badgeRequirements = json.load(json_file)[choice]  # Finds the right json object for this badge
+
     selection = buttonbox( msg="{0} \nRequirements:\n\n{1}".format(choice,"\n\n".join(badgeRequirements)),
                            choices=["Main Menu", "Badge List", "Recommended Badges", "More like this", "Badge Image"],
-                           title=choice)
+                           title=choice)  #  displays the requirements
 
-    if selection == "Main Menu":
+    if selection == "Main Menu":  # interprets what the user inputs
         mainFunc()
 
     if selection == "Badge List":
@@ -189,17 +189,19 @@ def badgeFunc(choice):
         recommendedBadges()
 
     if selection == "More like this":
-        print("test")
+        moreLikeThis(choice)
 
     if selection == "Badge Image":
         badgeFuncImage(choice)
 
-def badgeFuncImage(choice):
-    image = "badges\{0}.png".format(choice)
+
+def badgeFuncImage(choice):  # Shows the image to the user
+    image = "badges\{0}.png".format(choice)  # Gets the image from the bank of images
     buttonbox(image=image, title=choice, choices=["Back"])
     badgeFunc(choice)
 
-def helpFunc():
+
+def helpFunc():  # Tells the user everything they need to know about the application
     choice = msgbox(ok_button="Main Menu", msg="Hello and welcome to the Scout Badge Recommendation engine\n"
                                       "This quick guide will take you through everything you need to know about the application\n"
                                       "\n"
