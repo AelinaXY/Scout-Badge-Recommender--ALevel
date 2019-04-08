@@ -7,7 +7,7 @@ from csvimporting import csvImporting
 # lets to user pick badges using the csv list of badges
 def picker():
     try:
-        msg = "Pick your badges"
+        msg = "Please select the badges you have done"
         title = "Badge picker"
         badgeList = list(csvImporting().keys())
         badgeChoice = multchoicebox(msg, title, badgeList)
@@ -64,6 +64,9 @@ def newRecommendations():
         # takes the final list of recommendations and inputs it into a json file
     with open('recommendations.json', 'w') as f:
         json.dump(rec1, f)
+
+    with open('firsttime.json', 'w') as json_file:
+        json.dump(False, json_file)
 
     recommendedBadges()
 
@@ -213,6 +216,18 @@ def helpFunc():
 
 # the main control function
 def mainFunc():
+    with open('firsttime.json') as json_file:
+        firstTime = json.load(json_file)
+        print(firstTime)
+
+    if firstTime == True:
+        msgbox("Welcome to the Scout Badge Recommendation engine\n"
+               "As this is your first time launching the application, we will take an introductory assessment of what"
+               "badges you have done.")
+        newRecommendations()
+
+
+
     image = "logo.png"
     choice = buttonbox("Welcome to the Scout Badge Recommendation Engine\nIf you are confused on what to do click the Help button", "Main", choices=["Quit", "Add New Badges", "Remove Badges", "Badge List", "Your Recommended Badges", "Enter brand new set of badges", "Help"], image=image)
 
