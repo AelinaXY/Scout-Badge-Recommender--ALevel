@@ -36,8 +36,8 @@ def recommendedBadges():
 
         print(recommendations[0])
         image = "badges\{0}.png".format(recommendations[0])
-        choice = buttonbox("We believe that you would like {0}, {1}, {2}, {3}, {4} \n Click the badge you want to find out more about, or click back".format(recommendations[0], recommendations[1], recommendations[2], recommendations[3], recommendations[4]), title="Recommendations", choices=(["Back", recommendations[0], recommendations[1], recommendations[2], recommendations[3], recommendations[4]]), image=image)
-        if choice == "Back":
+        choice = buttonbox("We believe that you would like {0}, {1}, {2}, {3}, {4} \n Click the badge you want to find out more about, or click back".format(recommendations[0], recommendations[1], recommendations[2], recommendations[3], recommendations[4]), title="Recommendations", choices=(["Main Menu", recommendations[0], recommendations[1], recommendations[2], recommendations[3], recommendations[4]]), image=image)
+        if choice == "Main Menu":
             mainFunc()
 
         if choice == image:
@@ -162,7 +162,7 @@ def addBadges():
 
 def allBadgeFunc():
     badgeList = list(csvImporting().keys())
-    badgeChoice = choicebox(msg="Choose your badge", title="Badges", choices = badgeList)
+    badgeChoice = choicebox(msg="Choose your badge", title="Badges", choices=badgeList)
 
     if badgeChoice == None:
         mainFunc()
@@ -249,31 +249,31 @@ def moreLikeThis(choice):
     rec1.remove(choice)
 
     image = "badges\{0}.png".format(rec1[0])
-    choice = buttonbox(
+    selection = buttonbox(
         "Badges like {5} are:  {0}, {1}, {2}, {3}, {4} \n Click the badge you want to find out more about, or click back".format(
             rec1[0], rec1[1], rec1[2], rec1[3], rec1[4], choice),
         title="More Like this", choices=(
         ["Back", "Main Menu", rec1[0], rec1[1], rec1[2], rec1[3], rec1[4]]),
         image=image)
 
-    if choice == "Back":
+    if selection == "Back":
         badgeFunc(choice)
 
-    if choice == "Main Menu":
+    if selection == "Main Menu":
         mainFunc()
 
-    if choice == image:
+    if selection == image:
         badgeFunc(rec1[0])
 
-    if choice in rec1:
-        badgeFunc(choice)
+    if selection in rec1:
+        badgeFunc(selection)
 
 
 # the main control function
 def mainFunc():
     with open('firsttime.json') as json_file:
         firstTime = json.load(json_file)
-        print(firstTime)
+
 
     if firstTime == True:
         msgbox("Welcome to the Scout Badge Recommendation engine\n"
