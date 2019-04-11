@@ -305,4 +305,8 @@ def mainFunc():
     if choice == "Help":
         helpFunc()
 
+    if choice == "logo.png":
+        mainFunc()
+
+
 mainFunc()
